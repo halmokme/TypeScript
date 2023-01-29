@@ -54,6 +54,8 @@
   notSure = true;
 
   // any -> 어떤 것이든 담을 수 있는 변수. 💩
+  // any 타입은 타입 검사를 하지 않아서, 함수의 인자로 어떤 타입이 들어갔고 어떤 값이 반환되는지는 알 수가 없다.
+  // 이 문제를 해결할 수 있는 방법으로 제너릭을 사용한다.
   let anything: any = 0;
   anything = "hello";
 
@@ -64,6 +66,7 @@
     return;
   }
 
+  // 변수에 선언하는 경우는 극히 드물다 -> undefined 밖에 할당할 수 없기 때문
   let unusable: void = undefined; // 💩
 
   // never -> 함수에서 절대 리턴되지 않는 경우에 그것을 명시하기 위해 쓰임
@@ -73,6 +76,7 @@
     throw new Error(message);
     // 2. while문으로 끝나지 않는 코드를 작성해야 함
     while (true) {}
+
     let neverEnding: never; // 💩
   }
 
