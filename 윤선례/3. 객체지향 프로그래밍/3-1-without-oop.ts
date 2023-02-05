@@ -23,7 +23,9 @@
   }
 
   coffeeBeans += 3 * BEANS_GRAM_PER_SHOT;
+  console.log(coffeeBeans);
 
   const coffee = makeCoffee(2);
   console.log(coffee);
+  console.log(coffeeBeans);
 }
