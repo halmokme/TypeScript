@@ -22,7 +22,7 @@
 
     // 아래처럼 static 키워드를 붙여서 오브젝트를 만들 수 있는 함수를 제공한다는 것은
     // 생성자로 생성하는 것을 금지하기 위해 사용
-    // pirvate constructor으로 만들어서, static 메소드를 이용할 수 있도록 권장하는 것이 좋음
+    // private constructor으로 만들어서, static 메소드를 이용할 수 있도록 권장하는 것이 좋음
     // const maker = new CoffeeMaker(32)가 아니라,
     // const maker = CoffeeMaker.makeMachine(32) 형태로 오브젝트를 만들 수 있다
     static makeMachine(coffeeBeans: number): CoffeeMachine {
