@@ -74,7 +74,6 @@
     // 부모 클래스에서 필요한 데이터도 받아와야 하고 (beans) 이것을 super로 전달해야 함
     constructor(beans: number, public readonly serialNumber: string) {
       super(beans);
-      this.coffeeBeans = beans;
     }
   }
 
@@ -91,7 +90,6 @@
     }
     constructor(beans: number) {
       super(beans);
-      this.coffeeBeans = beans;
     }
   }
 
