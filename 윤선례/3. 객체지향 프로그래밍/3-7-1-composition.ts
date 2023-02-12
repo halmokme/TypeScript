@@ -147,4 +147,16 @@
   interface CoffeeMaker {
     makeCoffee(shots: number): CoffeeCup;
   }
+
+  // 이렇게 작성하게 되면 재사용성이 현저히 떨어진다 (한 가지 행동밖에 못하고, 다른 재료를 아예 넣을 수 없기 때문)
+  const cheapMilkMaker = new MilkSteamer();
+  const candySugar = new AutomaticSugarMixer();
+  const sweetMachine = new SweetCoffeeMaker(12, candySugar);
+  const latteMachine = new CafeLatteMachine(12, "SSS", cheapMilkMaker);
+  const sweetLatteMachine = new SweetCafeLatteMachine(
+    12,
+    cheapMilkMaker,
+    candySugar
+  );
+  // 클래스간 서로 상호 작용하는 경우에 클래스 자신을 노출하는 것이 아니라 인터페이스에 의거한 의사소통을 해야 함
 }
