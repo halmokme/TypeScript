@@ -86,4 +86,57 @@ ResultState는 유니온 타입 ( 성공 상태 | 실패 상태 )
 
 프로그래밍 할 때 예상할 수 있는 상태 (성공, 실패) 를 타입으로 정의하는 것이 깔끔하고 안정적, 예상 가능함
 
+```tsx
+
+ {
+  class TimeoutError extends Error {}
+
+  class OfflineError extends Error {}
+
+  type SuccessState = {
+    result: "성공";
+  };
+  type NetWorkErrorState = {
+    result: "실패";
+    reason: "오프라인" | "서버 다운" | "타임아웃";
+  };
+  type ResultState = SuccessState | NetWorkErrorState;
+  class NetWorkClient {
+    tryConnect(): ResultState {}
+  }
+
+  class UserService {
+    constructor(private client: NetWorkClient) {}
+    login() {
+      this.client.tryConnect();
+    }
+  }
+
+  type Error = {};
+
+  const client = new NetWorkClient();
+  const service = new UserService(client);
+
+  class App {
+    constructor(private userService: UserService) {}
+    run(): void {
+      try {
+        this.userService.login();
+      } catch (error) {
+        // 에러 메시지를 유저에게 보여줌
+        if (error instanceof OfflineError) {
+          // 사용할 수 없음. 왜 ? catch로 error를 받는 순간 any 타입이 돼서, 타입에 대한 정보가 사라지기 때문
+          // TypeScript에서 구현된 catch()에는 어떠한 타입 정보도 전달되지 않아서 instanceOf를 사용할 수 없다
+        }
+      }
+    }
+  }
+
+  const app = new App(service);
+  app.run();
+  // 네트워크에 연결되어 있지 않습니다. 네트워크 확인 후 재시도하세요.
+}
+
+```
+
 - ?**TypeScript에서 구현된 catch()에는 어떠한 타입 정보도 전달되지 않아서 instanceOf를 사용할 수 없다**
