@@ -11,3 +11,4 @@ class Car {
 }
 const car = new Car();
 car.move();
+//# sourceMappingURL=main.js.map
